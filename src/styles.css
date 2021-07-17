@@ -1,3 +1,51 @@
-h1 {
-  color: blue;
+body {
+  font-family: Google Sans, arial, sans-serif !important;
+}
+
+.current-weather-icon {
+  display: inline-block;
+  vertical-align: top;
+  height: 60px;
+  margin-top: unset;
+  width: 60px;
+}
+.temperature {
+  color: #202124;
+  line-height: 60px;
+  vertical-align: top;
+  font-size: 48px;
+}
+.units {
+  color: #202124;
+  display: inline-block;
+  line-height: 24px;
+  padding-left: 6px;
+  vertical-align: top;
+  font-size: 16px;
+  margin-top: 6px;
+}
+li {
+  list-style: none;
+}
+.weather-details {
+  color: #70757a;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 16px;
+  padding-left: 9px;
+  padding-top: 6px;
+}
+.second-col {
+  display: block;
+}
+
+.city {
+  color: #202124;
+  font-size: 22px;
+  line-height: 26px;
+}
+.locale-descriptor {
+  color: #70757a;
+  font-size: 16px;
+  line-height: 20px;
 }
