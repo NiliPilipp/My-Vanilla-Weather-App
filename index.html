@@ -13,38 +13,49 @@
     <title>Vanilla Weather App</title>
     <link rel="stylesheet" href="src/styles.css" />
   </head>
-  
+
   <body>
-    <div class="container"></div>
-    <div class="weather-frame">
-      <div class="row">
-          <div class="col">
-            <img class="current-weather-icon" alt="Sunny" src="images/sunny.png" />
-            <span class="temperature">24 </span> <span class="units">°C|°F</span>
-            <div class = "weather-details">
-          <ul>
-            <li>Precipitation: 1%</li>
-            <li>Humidity: 58%</li>
-            <li>Wind: 10km/h</li>
-          </ul>
-          </div>
-          </div>
-         <div class="col-3 middle-col"></div>
-          <div class="col second-col" >
-          <ul>
-            <li><h1 class="city">Bet Shemesh</h1></li>
-            <div class="locale-descriptor">
-            <li>Sunday 10:53PM</li>
-            <li>Sunny</li>
+    <div class="container">
+      <div class="weather-frame">
+        <hr />
+        <div class="row">
+          <div class="col-8">
+            <img
+              class="current-weather-icon"
+              alt="Sunny"
+              src="images/sunny.png"
+            />
+            <span class="temperature">24 </span>
+            <span class="units">°C|°F</span>
+            <div class="weather-details">
+              <ul>
+                <li>Precipitation: 1%</li>
+                <li>Humidity: 58%</li>
+                <li>Wind: 10km/h</li>
+              </ul>
             </div>
-          </ul>
           </div>
-      </div> 
+          <div class="col-4 second-col">
+            <ul>
+              <li><h1 class="city">Bet Shemesh</h1></li>
+              <div class="locale-descriptor">
+                <li>Sunday 10:53PM</li>
+                <li>Sunny</li>
+              </div>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <small
+          ><a
+            href="https://github.com/NiliPilipp/My-Vanilla-Weather-App"
+            target="_blank"
+            >Source code</a
+          >
+          by Nili Philipp</small
+        >
       </div>
-    <small><a href="https://github.com/NiliPilipp/My-Vanilla-Weather-App" target="_blank">Source code</a> by Nili Philipp</small>
     </div>
     <script src="src/app.js"></script>
   </body>
 </html>
-
-
