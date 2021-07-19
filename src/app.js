@@ -49,6 +49,43 @@ function getCity(event) {
     getWeather(newCity);
   }
 }
+function getCurrentDate() {
+  let today = document.querySelector("#day");
+  let currentMonth = document.querySelector("#month");
+  let currentYear = document.querySelector("#year");
+  let now = new Date();
+  let days = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  today.innerHTML = days[now.getDay()];
+  currentMonth.innerHTML = months[now.getMonth()];
+  currentYear.innerHTML = now.getFullYear();
 
+  let currentTime = document.querySelector("#time");
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  let hours = now.getHours();
+  if (hours < 12) {
+    currentTime.innerHTML = now.getHours() + ":" + minutes + " AM";
+  } else {
+    currentTime.innerHTML = now.getHours() - 12 + ":" + minutes + " PM";
+  }
+}
+
+getCurrentDate();
 let searchButton = document.querySelector("#search-button");
 searchButton.addEventListener("click", getCity);
