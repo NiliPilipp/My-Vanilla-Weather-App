@@ -18,15 +18,32 @@
   <body>
     <div class="container">
       <div class="weather-frame">
-        <hr />
-        <div class="row">
-          <div class="col-8">
-            <img
-              class="current-weather-icon"
-              alt="Sunny"
-              src="images/sunny.png"
+        <hr id="top-bar" />
+        <form>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="search-bar"
+              placeholder="Enter a location"
+              aria-label="Recipient's username with two button addons"
             />
-            <span class="temperature" id="IDtemperature">24 </span>
+            <button
+              class="btn btn-outline-secondary"
+              id="search-button"
+              type="button"
+            >
+              Search
+            </button>
+            <button class="btn btn-outline-secondary" type="button">
+              Current
+            </button>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-6">
+            <img id="weatherIcon" alt="Sunny" src="images/sunny.png" />
+            <span id="temperature">24 </span>
             <span class="units"
               ><a href="#" id="toCelcius">°C</a> |<a href="#" id="toFarenheit"
                 >°F</a
@@ -40,17 +57,24 @@
               </ul>
             </div>
           </div>
-          <div class="col-4 second-col">
+          <div class="col-6 second-col">
             <ul>
-              <li><h1 class="city" id="IDcity">Bet Shemesh</h1></li>
+              <li><h1 id="city">Bet Shemesh</h1></li>
               <div class="locale-descriptor">
-                <li>Sunday 10:53PM</li>
+                <li>
+                  <span id="day">Sunday</span>, <span id="month">July</span>,
+                  <span id="date">19</span>, <span id="year">2021</span>
+                  <div class="time">
+                    <span id="hour">10</span> :<span id="minutes">53</span
+                    ><span id="AM-PM">PM</span>
+                  </div>
+                </li>
                 <li id="IDdescription">Sunny</li>
               </div>
             </ul>
           </div>
         </div>
-        <hr />
+        <hr id="bottom-bar" />
         <small class="source-author">
           <a
             href="https://github.com/NiliPilipp/My-Vanilla-Weather-App"

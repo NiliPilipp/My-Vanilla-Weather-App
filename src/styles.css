@@ -12,11 +12,16 @@ li {
 }
 hr {
   color: #a9a9aa;
+}
+#bottom-bar {
   margin-bottom: 30px;
 }
 h1 {
   margin-bottom: 0px;
   padding-bottom: 0px;
+}
+.input-group {
+  margin-bottom: 30px;
 }
 .weather-frame {
   max-width: 600px;
@@ -24,14 +29,15 @@ h1 {
   margin-top: 50px;
 }
 
-.current-weather-icon {
+#weatherIcon {
   display: inline-block;
   vertical-align: top;
   height: 60px;
   margin-top: unset;
   width: 60px;
+  padding-top: 0;
 }
-.temperature {
+#temperature {
   color: #202124;
   line-height: 60px;
   vertical-align: top;
@@ -64,7 +70,7 @@ h1 {
   text-align: right;
 }
 
-.city {
+#city {
   color: #202124;
   font-size: 22px;
   line-height: 26px;
