@@ -55,6 +55,14 @@ h1 {
   position: relative;
   left: -5px;
 }
+#toCelcius:hover,
+#toCelcius:visited,
+#toCelcius:link,
+#toFarenheit:hover,
+#toFarenheit:visited,
+#toFarenheit:link {
+  text-decoration: none;
+}
 
 .weather-details {
   color: #70757a;
