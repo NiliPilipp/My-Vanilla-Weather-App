@@ -50,6 +50,7 @@ function displayWeather(response) {
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(CelciusTemp);
   document.getElementById("toFarenheit").style.color = "#0d6efd";
+  document.getElementById("toCelcius").style.color = "#202124";
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
   let humidityElement = document.querySelector("#IDhumidity");
@@ -102,16 +103,6 @@ function getLocalWeather(response) {
   axios.get(apiURL).then(displayWeather);
 }
 
-function getCurrentData() {
-  navigator.geolocation.getCurrentPosition(getLocalWeather);
-  let now = new Date();
-  displayDate(now);
-}
-function goCurrentDataHandler(event) {
-  event.preventDefault();
-  getCurrentData();
-}
-
 function convertFarenheit(event) {
   event.preventDefault;
   let convertedTemp = document.querySelector("#temperature");
@@ -128,6 +119,15 @@ function convertCelcius(event) {
   document.getElementById("toCelcius").style.color = "#202124";
 }
 
+function getCurrentData() {
+  navigator.geolocation.getCurrentPosition(getLocalWeather);
+  let now = new Date();
+  displayDate(now);
+}
+function goCurrentDataHandler(event) {
+  event.preventDefault();
+  getCurrentData();
+}
 let CelciusTemp = null;
 getCurrentData();
 
