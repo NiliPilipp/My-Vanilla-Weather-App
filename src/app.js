@@ -1,4 +1,21 @@
 // netlify link https://serene-hypatia-f67995.netlify.app/
+
+function convertFarenheit(event) {
+  event.preventDefault;
+  let convertedTemp = document.querySelector("#temperature");
+  convertedTemp.innerHTML = Math.round((CelciusTemp * 9) / 5 + 32);
+  document.getElementById("toFarenheit").style.color = "#202124";
+  document.getElementById("toCelcius").style.color = "#0d6efd";
+}
+
+function convertCelcius(event) {
+  event.preventDefault;
+  let convertedTemp = document.querySelector("#temperature");
+  convertedTemp.innerHTML = Math.round(CelciusTemp);
+  document.getElementById("toFarenheit").style.color = "#0d6efd";
+  document.getElementById("toCelcius").style.color = "#202124";
+}
+
 function displayDate(now) {
   let days = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
   let months = [
@@ -39,6 +56,26 @@ function displayDate(now) {
   }
 }
 
+function displayForecast() {
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+              <div class="forecast-day-of-week">${day}</div>
+              <img class="forecast-icon" alt="Sunny" src="images/sunny.png" />
+              <div class="forecast-temp">
+                <span class="forecast-high">30</span>
+                <span class="forecast-low">18</span>
+              </div>
+            </div>`;
+  });
+  forecastHTML = forecastHTML + "</div>";
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayWeather(response) {
   CelciusTemp = response.data.main.temp;
 
@@ -62,6 +99,7 @@ function displayWeather(response) {
     response.data.weather[0].main +
     " with " +
     response.data.weather[0].description;
+  displayForecast();
 
   //convert to new time zone
   localTime = new Date();
@@ -103,26 +141,11 @@ function getLocalWeather(response) {
   axios.get(apiURL).then(displayWeather);
 }
 
-function convertFarenheit(event) {
-  event.preventDefault;
-  let convertedTemp = document.querySelector("#temperature");
-  convertedTemp.innerHTML = Math.round((CelciusTemp * 9) / 5 + 32);
-  document.getElementById("toFarenheit").style.color = "#202124";
-  document.getElementById("toCelcius").style.color = "#0d6efd";
-}
-
-function convertCelcius(event) {
-  event.preventDefault;
-  let convertedTemp = document.querySelector("#temperature");
-  convertedTemp.innerHTML = Math.round(CelciusTemp);
-  document.getElementById("toFarenheit").style.color = "#0d6efd";
-  document.getElementById("toCelcius").style.color = "#202124";
-}
-
 function getCurrentData() {
   navigator.geolocation.getCurrentPosition(getLocalWeather);
   let now = new Date();
   displayDate(now);
+  displayForecast();
 }
 function goCurrentDataHandler(event) {
   event.preventDefault();
