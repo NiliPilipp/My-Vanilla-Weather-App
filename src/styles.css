@@ -88,6 +88,33 @@ h1 {
   font-size: 16px;
   line-height: 20px;
 }
+
+.weather-forecast {
+  text-align: center;
+  margin-top: 20px;
+}
+.forecast-day-of-week {
+  color: #bababa;
+  line-height: 15px;
+  padding-top: 7px;
+}
+.forecast-icon {
+  height: 48px;
+  margin: 1px 4px 0;
+  width: 48px;
+}
 .source-author {
   font-family: monospace;
+}
+.forecast-temp {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 15px;
+}
+
+.forecast-high {
+  color: #70757a !important;
+}
+.forecast-low {
+  color: #bababa;
 }
