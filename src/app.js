@@ -56,7 +56,8 @@ function displayDate(now) {
   }
 }
 
-function displayForecast() {
+function displayForecast(forecast_response) {
+  console.log(forecast_response.data);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
   let forecastHTML = `<div class="row">`;
   days.forEach(function (day) {
@@ -75,10 +76,18 @@ function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHTML;
 }
-
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let units = "metric";
+  let apiKey = "4fc9de9420224385e6f3f281435126d7";
+  let forecastAPIURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={current,minutely,hourly,alerts}&appid=${apiKey}&units=${units}`;
+  console.log(forecastAPIURL);
+  axios.get(forecastAPIURL).then(displayForecast);
+}
 function displayWeather(response) {
   CelciusTemp = response.data.main.temp;
-
+  console.log(response);
+  console.log(response.data.coord);
   let iconElement = document.querySelector("#weatherIcon");
   iconElement.setAttribute(
     "src",
@@ -99,6 +108,7 @@ function displayWeather(response) {
     response.data.weather[0].main +
     " with " +
     response.data.weather[0].description;
+  getForecast(response.data.coord);
   displayForecast();
 
   //convert to new time zone
