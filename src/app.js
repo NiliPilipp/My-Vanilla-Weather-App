@@ -17,7 +17,6 @@ function convertCelcius(event) {
 }
 
 function displayDate(now) {
-  let days = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
   let months = [
     "January",
     "February",
@@ -57,37 +56,44 @@ function displayDate(now) {
 }
 
 function displayForecast(forecast_response) {
-  console.log(forecast_response.data);
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-              <div class="forecast-day-of-week">${day}</div>
-              <img class="forecast-icon" alt="Sunny" src="images/sunny.png" />
+  let forecast = forecast_response.data.daily;
+  forecast.forEach(function (forecastday, index) {
+    if (index > 0 && index < 6) {
+      let date = new Date(forecastday.dt * 1000);
+      let day = date.getDay();
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+              <div class="forecast-day-of-week">${days[day]}</div>
+              <img class="forecast-icon" alt="Sunny" src="http://openweathermap.org/img/wn/${
+                forecastday.weather[0].icon
+              }@2x.png" />
               <div class="forecast-temp">
-                <span class="forecast-high">30</span>
-                <span class="forecast-low">18</span>
+                <span class="forecast-high">${Math.round(
+                  forecastday.temp.max
+                )}°</span>
+                <span class="forecast-low">${Math.round(
+                  forecastday.temp.min
+                )}°</span>
               </div>
             </div>`;
+    }
   });
   forecastHTML = forecastHTML + "</div>";
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHTML;
 }
+
 function getForecast(coordinates) {
-  console.log(coordinates);
   let units = "metric";
-  let apiKey = "4fc9de9420224385e6f3f281435126d7";
+
   let forecastAPIURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={current,minutely,hourly,alerts}&appid=${apiKey}&units=${units}`;
-  console.log(forecastAPIURL);
   axios.get(forecastAPIURL).then(displayForecast);
 }
+
 function displayWeather(response) {
   CelciusTemp = response.data.main.temp;
-  console.log(response);
-  console.log(response.data.coord);
   let iconElement = document.querySelector("#weatherIcon");
   iconElement.setAttribute(
     "src",
@@ -108,19 +114,18 @@ function displayWeather(response) {
     response.data.weather[0].main +
     " with " +
     response.data.weather[0].description;
-  getForecast(response.data.coord);
-  displayForecast();
 
   //convert to new time zone
   localTime = new Date();
   utcTime = localTime.getTime() + localTime.getTimezoneOffset() * 60000;
   newCityTime = new Date(utcTime + 1000 * response.data.timezone);
   displayDate(newCityTime);
+  //get Forecast for location
+  getForecast(response.data.coord);
 }
 
 function getNewCityWeather(newCity) {
   let units = "metric";
-  let apiKey = "4fc9de9420224385e6f3f281435126d7";
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${newCity}&units=${units}&appid=${apiKey}`;
   axios
     .get(apiURL)
@@ -143,10 +148,11 @@ function getCity(event) {
 }
 
 function getLocalWeather(response) {
-  let apiKey = "4fc9de9420224385e6f3f281435126d7";
   let units = "metric";
   let latitude = response.coords.latitude;
   let longitude = response.coords.longitude;
+  let currentCity = document.querySelector("#search-bar");
+  currentCity.value = "";
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiURL).then(displayWeather);
 }
@@ -155,12 +161,13 @@ function getCurrentData() {
   navigator.geolocation.getCurrentPosition(getLocalWeather);
   let now = new Date();
   displayDate(now);
-  displayForecast();
 }
 function goCurrentDataHandler(event) {
   event.preventDefault();
   getCurrentData();
 }
+let apiKey = "4fc9de9420224385e6f3f281435126d7";
+let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let CelciusTemp = null;
 getCurrentData();
 
