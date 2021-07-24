@@ -46,7 +46,6 @@ h1 {
   padding-right: 0px;
 }
 .units {
-  color: #202124;
   display: inline-block;
   line-height: 24px;
   vertical-align: top;
@@ -62,6 +61,7 @@ h1 {
 #toFarenheit:visited,
 #toFarenheit:link {
   text-decoration: none;
+  color: #202124;
 }
 
 .weather-details {

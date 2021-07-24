@@ -40,7 +40,7 @@ function displayDate(now) {
 }
 
 function displayWeather(response) {
-  CelciusTemp = Math.round(response.data.main.temp);
+  CelciusTemp = response.data.main.temp;
 
   let iconElement = document.querySelector("#weatherIcon");
   iconElement.setAttribute(
@@ -48,7 +48,8 @@ function displayWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = CelciusTemp;
+  temperatureElement.innerHTML = Math.round(CelciusTemp);
+  document.getElementById("toFarenheit").style.color = "#0d6efd";
   let cityElement = document.querySelector("#city");
   cityElement.innerHTML = response.data.name;
   let humidityElement = document.querySelector("#IDhumidity");
@@ -115,12 +116,16 @@ function convertFarenheit(event) {
   event.preventDefault;
   let convertedTemp = document.querySelector("#temperature");
   convertedTemp.innerHTML = Math.round((CelciusTemp * 9) / 5 + 32);
+  document.getElementById("toFarenheit").style.color = "#202124";
+  document.getElementById("toCelcius").style.color = "#0d6efd";
 }
 
 function convertCelcius(event) {
   event.preventDefault;
   let convertedTemp = document.querySelector("#temperature");
-  convertedTemp.innerHTML = CelciusTemp;
+  convertedTemp.innerHTML = Math.round(CelciusTemp);
+  document.getElementById("toFarenheit").style.color = "#0d6efd";
+  document.getElementById("toCelcius").style.color = "#202124";
 }
 
 let CelciusTemp = null;
