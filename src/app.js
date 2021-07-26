@@ -6,6 +6,14 @@ function convertFarenheit(event) {
   convertedTemp.innerHTML = Math.round((CelciusTemp * 9) / 5 + 32);
   document.getElementById("toFarenheit").style.color = "#202124";
   document.getElementById("toCelcius").style.color = "#0d6efd";
+  let convertedForcastHigh = document.querySelectorAll(".forecast-high");
+  convertedForcastHigh.forEach(function (High, index) {
+    High.innerHTML = Math.round((CelciusForecastHighs[index] * 9) / 5 + 32);
+  });
+  let convertedForcastLow = document.querySelectorAll(".forecast-low");
+  convertedForcastLow.forEach(function (Low, index) {
+    Low.innerHTML = Math.round((CelciusForecastLows[index] * 9) / 5 + 32);
+  });
 }
 
 function convertCelcius(event) {
@@ -14,6 +22,14 @@ function convertCelcius(event) {
   convertedTemp.innerHTML = Math.round(CelciusTemp);
   document.getElementById("toFarenheit").style.color = "#0d6efd";
   document.getElementById("toCelcius").style.color = "#202124";
+  let convertedForcastHigh = document.querySelectorAll(".forecast-high");
+  convertedForcastHigh.forEach(function (High, index) {
+    High.innerHTML = Math.round(CelciusForecastHighs[index]);
+  });
+  let convertedForcastLow = document.querySelectorAll(".forecast-low");
+  convertedForcastLow.forEach(function (Low, index) {
+    Low.innerHTML = Math.round(CelciusForecastLows[index]);
+  });
 }
 
 function displayDate(now) {
@@ -72,12 +88,14 @@ function displayForecast(forecast_response) {
               <div class="forecast-temp">
                 <span class="forecast-high">${Math.round(
                   forecastday.temp.max
-                )}°</span>
+                )}</span>°
                 <span class="forecast-low">${Math.round(
                   forecastday.temp.min
-                )}°</span>
+                )}</span>°
               </div>
             </div>`;
+      CelciusForecastLows[index - 1] = forecastday.temp.min;
+      CelciusForecastHighs[index - 1] = forecastday.temp.max;
     }
   });
   forecastHTML = forecastHTML + "</div>";
@@ -138,7 +156,6 @@ function getNewCityWeather(newCity) {
 }
 
 function getCity(event) {
-  event.preventDefault();
   let newCity = document.querySelector("#search-bar").value.toLowerCase();
   if (newCity.trim().length === 0) {
     alert("Please enter a city to continue.");
@@ -166,9 +183,20 @@ function goCurrentDataHandler(event) {
   event.preventDefault();
   getCurrentData();
 }
+
 let apiKey = "4fc9de9420224385e6f3f281435126d7";
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let CelciusTemp = null;
+let CelciusForecastLows = ["", "", "", "", ""];
+let CelciusForecastHighs = ["", "", "", "", ""];
+let searchBar = document.querySelector("#search-bar");
+searchBar.addEventListener("keypress", function (e) {
+  if (e.which == 13) {
+    e.preventDefault();
+    getCity();
+  }
+});
+
 getCurrentData();
 
 let searchButton = document.querySelector("#search-button");
